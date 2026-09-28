@@ -1,0 +1,723 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SSW — концепт магазина</title>
+<meta name="description" content="Концепт-демо интернет-магазина для минского бренда платьев SSW. Не официальный сайт бренда.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0E0A08">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0E0A08;
+    --bg-2:#16110E;
+    --ink:#EFE7DC;
+    --ink-soft:#A1968B;
+    --ink-faint:#6A6058;
+    --line:rgba(239,231,220,.12);
+    --line-strong:rgba(239,231,220,.3);
+    --accent:#B3141E;
+    --accent-hover:#D01C27;
+    --choco:#3B241B;
+    --paper:#EDE4D8;
+    --paper-ink:#1A1310;
+    --serif:"Bodoni Moda",Didot,"Times New Roman",serif;
+    --sans:"Jost","Helvetica Neue",sans-serif;
+    --cut:polygon(0 0,100% 0,100% 90%,84% 100%,0 100%);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  html,body{overflow-x:clip}
+  body{background:var(--bg);color:var(--ink);font:300 16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+  body::after{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:300;opacity:.045;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  img{display:block;max-width:100%}
+  a{color:inherit}
+  button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+  :focus-visible{outline:1px solid var(--ink);outline-offset:4px}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 32px}
+  .mono{font-family:var(--sans);font-weight:500;font-size:11px;letter-spacing:.28em;text-transform:uppercase}
+
+  .demo-bar{background:var(--accent);color:#fff;text-align:center;font:500 11.5px/1.4 var(--sans);letter-spacing:.06em;padding:8px 16px}
+  .demo-bar a{color:#fff}
+
+  /* ======= шапка ======= */
+  header{position:sticky;top:0;z-index:50;background:rgba(14,10,8,.84);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .bar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:68px}
+  .bar nav{display:flex;gap:28px}
+  .bar nav a{text-decoration:none;color:var(--ink-soft);transition:color .2s}
+  .bar nav a:hover{color:var(--ink)}
+  .logo{
+    display:grid;place-items:center;width:48px;height:48px;border-radius:50%;
+    border:1px solid var(--line-strong);text-decoration:none;
+    font:400 13px/1 var(--serif);letter-spacing:.14em;padding-left:.14em;
+  }
+  .bar-r{display:flex;justify-content:flex-end;align-items:center}
+  .cart-btn{display:flex;align-items:center;gap:10px}
+  .cart-btn .count{
+    min-width:22px;height:22px;border-radius:11px;background:var(--ink);color:var(--bg);
+    display:grid;place-items:center;font:600 11px var(--sans);padding:0 6px;transition:transform .25s;
+  }
+  .cart-btn .count.bump{transform:scale(1.3)}
+
+  /* ======= хиро ======= */
+  .hero{position:relative;min-height:calc(100svh - 104px);display:grid;grid-template-columns:1.2fr 1fr;border-bottom:1px solid var(--line)}
+  .hero-l{position:relative;display:flex;flex-direction:column;justify-content:space-between;gap:40px;padding:56px 40px 48px max(32px,calc((100vw - 1240px)/2 + 32px));overflow:hidden}
+  .hero-word{position:relative;font:400 clamp(120px,19vw,280px)/.82 var(--serif);letter-spacing:-.02em;margin-left:-.04em}
+  .hero-word span{display:block}
+  .hero-word .i{font-style:italic;color:transparent;-webkit-text-stroke:1px var(--ink)}
+  .slash{position:absolute;left:-10%;top:52%;width:130%;height:1px;background:var(--accent);transform:rotate(-14deg)}
+  .hero-copy{max-width:440px}
+  .hero-copy .mono{color:var(--ink-soft);display:block;margin-bottom:16px}
+  .hero-copy h1{font:400 clamp(26px,2.5vw,36px)/1.22 var(--serif)}
+  .hero-copy h1 em{font-style:italic;color:var(--accent)}
+  .hero-copy p{margin-top:14px;color:var(--ink-soft)}
+  .cta{display:flex;gap:14px;margin-top:28px;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;
+    font:500 12px var(--sans);letter-spacing:.22em;text-transform:uppercase;
+    padding:17px 28px;border:1px solid var(--ink);transition:background .25s,color .25s,border-color .25s;
+  }
+  .btn-fill{background:var(--ink);color:var(--bg)}
+  .btn-fill:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+  .btn-line:hover{background:var(--ink);color:var(--bg)}
+  .hero-r{position:relative;overflow:hidden;clip-path:polygon(16% 0,100% 0,100% 100%,0 100%);background:var(--choco)}
+  .hero-r img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 22%}
+  .hero-r::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(14,10,8,.75))}
+  .hero-r .caption{position:absolute;right:32px;bottom:32px;text-align:right;z-index:1}
+  .hero-r .caption b{display:block;font:italic 400 30px var(--serif)}
+  .hero-r .caption span{color:#D8CEC3;font-size:13.5px}
+  @media (prefers-reduced-motion:no-preference){
+    .hero-word span{animation:rise 1s cubic-bezier(.2,.8,.2,1) both}
+    .hero-word span:nth-child(2){animation-delay:.12s}
+    .slash{animation:slash 1.1s cubic-bezier(.7,0,.2,1) .5s both}
+    .hero-copy{animation:fade .9s ease .7s both}
+    .hero-r{animation:reveal 1.2s cubic-bezier(.7,0,.2,1) .15s both}
+    .hero-r img{animation:zoom 2.4s cubic-bezier(.2,.8,.2,1) .15s both}
+  }
+  @keyframes rise{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
+  @keyframes fade{from{opacity:0}to{opacity:1}}
+  @keyframes zoom{from{transform:scale(1.12)}to{transform:none}}
+  @keyframes slash{from{transform:rotate(-14deg) scaleX(0)}to{transform:rotate(-14deg) scaleX(1)}}
+  @keyframes reveal{from{clip-path:polygon(100% 0,100% 0,100% 100%,100% 100%)}to{clip-path:polygon(16% 0,100% 0,100% 100%,0 100%)}}
+
+  .marquee{border-bottom:1px solid var(--line);overflow:hidden;padding:18px 0;white-space:nowrap}
+  .marquee-in{display:inline-flex;gap:48px;font:italic 400 22px var(--serif);animation:run 40s linear infinite}
+  .marquee-in i{font-style:normal;color:var(--accent)}
+  @keyframes run{to{transform:translateX(-50%)}}
+
+  section{padding:110px 0}
+  .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:48px;flex-wrap:wrap}
+  .sec-head .mono{color:var(--accent);display:block;margin-bottom:14px}
+  h2{font:400 clamp(38px,5vw,64px)/1.02 var(--serif);letter-spacing:-.01em}
+  h2 em{font-style:italic}
+
+  .filters{display:flex;gap:6px;flex-wrap:wrap}
+  .filters button{font:500 11px var(--sans);letter-spacing:.2em;text-transform:uppercase;padding:10px 16px;border:1px solid var(--line-strong);color:var(--ink-soft);transition:all .2s}
+  .filters button:hover{color:var(--ink);border-color:var(--ink)}
+  .filters button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
+  /* ======= каталог ======= */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:56px 28px}
+  .card{display:flex;flex-direction:column;gap:16px;text-align:left}
+  .card:nth-child(3n+2){margin-top:64px}
+  .card .ph{position:relative;aspect-ratio:3/4.3;overflow:hidden;clip-path:var(--cut);background:var(--choco);transition:clip-path .6s cubic-bezier(.7,0,.2,1)}
+  .card:hover .ph{clip-path:polygon(0 0,100% 0,100% 100%,100% 100%,0 100%)}
+  .card .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 18%;transition:opacity .6s ease,transform .9s cubic-bezier(.2,.8,.2,1)}
+  .card .ph img.alt{opacity:0}
+  .card:hover .ph img.alt{opacity:1}
+  .card:hover .ph img{transform:scale(1.04)}
+  .card .badge{position:absolute;left:14px;top:14px;background:var(--bg);color:var(--ink);padding:6px 10px;font-size:10px;z-index:1}
+  .card .quick{position:absolute;left:14px;right:14px;bottom:14px;background:var(--ink);color:var(--bg);text-align:center;padding:13px;opacity:0;transform:translateY(10px);transition:all .35s;z-index:1}
+  .card:hover .quick,.card:focus-visible .quick{opacity:1;transform:none}
+  .card-meta{display:flex;justify-content:space-between;gap:16px;align-items:baseline}
+  .card-meta h3{font:400 22px/1.2 var(--serif)}
+  .card-meta h3 em{font-style:italic}
+  .card-meta .price{white-space:nowrap}
+  .card .kind{color:var(--ink-soft);font-size:13.5px;margin-top:-10px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .dots{display:inline-flex;gap:5px}
+  .dots i{width:10px;height:10px;border-radius:50%;border:1px solid var(--line-strong)}
+
+  /* ======= манифест ======= */
+  .manifest{background:var(--paper);color:var(--paper-ink)}
+  .manifest .wrap{display:grid;grid-template-columns:1fr 1.3fr;gap:64px;align-items:start}
+  .manifest .mono{color:var(--accent)}
+  .manifest h2{margin-top:14px}
+  .manifest blockquote{margin-top:28px;font:italic 400 20px/1.5 var(--serif);color:#5A4C43;max-width:30ch;border-left:2px solid var(--accent);padding-left:18px}
+  .pillar{display:grid;grid-template-columns:70px 1fr;gap:20px;padding:28px 0;border-top:1px solid rgba(26,19,16,.18)}
+  .pillar:last-child{border-bottom:1px solid rgba(26,19,16,.18)}
+  .pillar b{font:italic 400 34px/1 var(--serif);color:var(--accent)}
+  .pillar h3{font:400 26px/1.2 var(--serif);margin-bottom:6px}
+  .pillar p{color:#5A4C43}
+
+  /* ======= образ ======= */
+  .look{display:grid;grid-template-columns:1fr 1fr;border-block:1px solid var(--line)}
+  .look-ph{position:relative;min-height:680px;overflow:hidden;background:var(--choco)}
+  .look-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+  .look-ph .num{position:absolute;left:28px;top:20px;font:italic 400 120px/1 var(--serif);color:transparent;-webkit-text-stroke:1px rgba(239,231,220,.55);z-index:1}
+  .look-txt{padding:80px 64px;display:flex;flex-direction:column;justify-content:center;gap:22px}
+  .look-txt .mono{color:var(--accent)}
+  .look-txt p{color:var(--ink-soft);max-width:46ch}
+  .two{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line)}
+  .two div{padding:18px 18px 18px 0}
+  .two div + div{padding-left:18px;border-left:1px solid var(--line)}
+  .two b{display:block;font:italic 400 22px var(--serif);margin-bottom:4px}
+  .two span{color:var(--ink-soft);font-size:14px}
+
+  /* ======= сервис ======= */
+  .service{display:grid;grid-template-columns:1.2fr 1fr;gap:64px}
+  table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+  th,td{text-align:left;padding:14px 10px;border-bottom:1px solid var(--line)}
+  th{font:500 11px var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft)}
+  td:first-child{font:italic 400 20px var(--serif)}
+  .svc{padding:22px 0;border-bottom:1px solid var(--line)}
+  .svc:first-child{border-top:1px solid var(--line)}
+  .svc h3{font:400 22px var(--serif);margin-bottom:4px}
+  .svc p{color:var(--ink-soft);font-size:14.5px}
+  .todo{color:var(--accent);font-size:12px;letter-spacing:.04em}
+
+  /* ======= лента ======= */
+  .feed{display:grid;grid-template-columns:repeat(6,1fr);gap:4px}
+  .feed a{position:relative;aspect-ratio:1;overflow:hidden;display:block}
+  .feed img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;transition:transform .6s ease,filter .4s}
+  .feed a:hover img{transform:scale(1.06);filter:brightness(.7)}
+
+  footer{border-top:1px solid var(--line);padding:70px 0 40px}
+  .foot-big{font:400 clamp(90px,17vw,240px)/.8 var(--serif);letter-spacing:.2em;color:transparent;-webkit-text-stroke:1px var(--line-strong);margin-bottom:48px}
+  .foot-row{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;color:var(--ink-soft);font-size:14px}
+  .foot-row a{text-decoration:none;border-bottom:1px solid var(--line-strong)}
+  .foot-row a:hover{color:var(--ink);border-color:var(--ink)}
+
+  /* ======= модалки ======= */
+  dialog{border:none;padding:0;background:var(--bg-2);color:var(--ink);max-width:min(980px,calc(100vw - 32px));width:100%;max-height:calc(100dvh - 32px);margin:auto}
+  dialog::backdrop{background:rgba(5,4,3,.82);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+  .x{position:absolute;right:12px;top:12px;width:42px;height:42px;display:grid;place-items:center;font-size:20px;z-index:3;background:var(--bg-2)}
+  .pd{display:grid;grid-template-columns:1fr 1fr}
+  .pd-gal{position:relative;background:var(--choco);min-height:600px}
+  .pd-gal > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 18%}
+  .thumbs{position:absolute;left:12px;bottom:12px;display:flex;gap:6px;z-index:2}
+  .thumbs button{width:48px;height:64px;border:1px solid transparent;overflow:hidden;opacity:.7;transition:all .2s}
+  .thumbs button img{width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+  .thumbs button[aria-pressed="true"]{border-color:var(--ink);opacity:1}
+  .pd-info{padding:48px 40px;display:flex;flex-direction:column;gap:18px;overflow:auto;max-height:calc(100dvh - 32px)}
+  .pd-info .mono{color:var(--accent)}
+  .pd-info h3{font:400 40px/1.05 var(--serif)}
+  .pd-info h3 em{font-style:italic}
+  .pd-info .price{font-size:20px}
+  .pd-info p{color:var(--ink-soft)}
+  .opt-label{color:var(--ink-soft);margin-bottom:10px}
+  .opts{display:flex;gap:8px;flex-wrap:wrap}
+  .opts button{min-width:52px;height:44px;padding:0 14px;border:1px solid var(--line-strong);font-weight:400;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
+  .opts button:hover{border-color:var(--ink)}
+  .opts button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+  .opts .sw{width:12px;height:12px;border-radius:50%;border:1px solid rgba(128,128,128,.5)}
+  .hint{font-size:13px;color:var(--ink-soft);min-height:20px}
+  .hint.err{color:var(--accent-hover)}
+  .pd-note{font-size:13.5px;border-top:1px solid var(--line);padding-top:16px;color:var(--ink-soft)}
+  .pd-note b{color:var(--ink);font-weight:500}
+
+  .drawer-bg{position:fixed;inset:0;background:rgba(5,4,3,.7);z-index:90;opacity:0;pointer-events:none;transition:opacity .3s}
+  .drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100vw);z-index:100;background:var(--bg-2);border-left:1px solid var(--line);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .45s cubic-bezier(.7,0,.2,1),visibility 0s .45s;visibility:hidden}
+  body.cart-open .drawer{transform:none;visibility:visible;transition:transform .45s cubic-bezier(.7,0,.2,1)}
+  body.cart-open .drawer-bg{opacity:1;pointer-events:auto}
+  .dr-head{display:flex;justify-content:space-between;align-items:center;padding:20px 28px;border-bottom:1px solid var(--line)}
+  .dr-head h3{font:italic 400 28px var(--serif)}
+  .dr-list{flex:1;overflow:auto;padding:8px 28px}
+  .line{display:grid;grid-template-columns:72px 1fr auto;gap:16px;padding:18px 0;border-bottom:1px solid var(--line);align-items:center}
+  .line img{width:72px;height:96px;object-fit:cover;object-position:50% 18%}
+  .line h4{font:400 18px var(--serif)}
+  .line small{color:var(--ink-soft)}
+  .qty{display:flex;align-items:center;gap:4px;margin-top:8px}
+  .qty button{width:28px;height:28px;border:1px solid var(--line-strong)}
+  .qty span{min-width:26px;text-align:center}
+  .line .rm{color:var(--ink-soft);font-size:12px;text-decoration:underline;text-underline-offset:3px}
+  .empty{padding:60px 0;text-align:center;color:var(--ink-soft)}
+  .empty b{display:block;font:italic 400 26px var(--serif);color:var(--ink);margin-bottom:6px}
+  .dr-foot{padding:22px 28px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:12px}
+  .dr-foot small{color:var(--ink-soft);font-size:13px}
+  .total{display:flex;justify-content:space-between;font-size:18px}
+  .dr-foot .btn{width:100%}
+  .dr-foot .btn[disabled]{opacity:.35;pointer-events:none}
+
+  #checkout{max-width:540px}
+  .co{padding:48px 40px 36px;display:flex;flex-direction:column;gap:16px}
+  .co h3{font:400 34px/1.1 var(--serif)}
+  .co h3 em{font-style:italic}
+  .co .lead{color:var(--ink-soft);font-size:14.5px}
+  .co label{display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--ink-soft)}
+  .co input,.co select{background:transparent;border:none;border-bottom:1px solid var(--line-strong);color:var(--ink);font:400 17px var(--sans);padding:10px 0;border-radius:0}
+  .co select option{background:var(--bg-2)}
+  .co input:focus,.co select:focus{outline:none;border-color:var(--ink)}
+  .co .note{font-size:12.5px;color:var(--ink-faint)}
+  .done{text-align:center;align-items:center}
+  .done .mark{font:italic 400 72px/1 var(--serif);color:var(--accent)}
+
+  @media (prefers-reduced-motion:no-preference){
+    body.js .rv{opacity:0;transform:translateY(30px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.8,.2,1)}
+    body.js .rv.in{opacity:1;transform:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none!important;transition:none!important}
+  }
+
+  @media (max-width:980px){
+    .grid{grid-template-columns:1fr 1fr}
+    .card:nth-child(3n+2){margin-top:0}
+    .card:nth-child(2n){margin-top:48px}
+    .manifest .wrap,.service{grid-template-columns:1fr;gap:40px}
+    .look{grid-template-columns:1fr}
+    .look-ph{min-height:560px}
+    .look-txt{padding:56px 32px}
+    .feed{grid-template-columns:repeat(3,1fr)}
+  }
+  @media (max-width:760px){
+    .wrap{padding:0 16px}
+    .bar{grid-template-columns:auto 1fr auto;height:60px}
+    .bar nav{display:none}
+    .logo{width:42px;height:42px;font-size:12px}
+    .bar-r{grid-column:3}
+    .hero{grid-template-columns:1fr;min-height:0}
+    .hero-l{padding:36px 16px 36px;gap:32px}
+    .hero-r{height:74vh;min-height:460px;clip-path:polygon(0 10%,100% 0,100% 100%,0 100%);order:-1}
+    .hero-r .caption{right:16px;bottom:20px}
+    @media (prefers-reduced-motion:no-preference){ .hero-r{animation:none} }
+    section{padding:72px 0}
+    .grid{gap:36px 12px}
+    .card:nth-child(2n){margin-top:36px}
+    .card-meta{flex-direction:column;gap:2px}
+    .card-meta h3{font-size:18px}
+    .card .kind{margin-top:-12px;font-size:12.5px}
+    .card .quick,.card .badge{display:none}
+    .pd{grid-template-columns:1fr}
+    .pd-gal{min-height:0;aspect-ratio:3/4}
+    .pd-info{padding:28px 20px;max-height:none}
+    .pd-info h3{font-size:32px}
+    dialog{overflow:auto}
+    .co{padding:44px 20px 28px}
+    .look-txt{padding:48px 16px}
+    .pillar{grid-template-columns:48px 1fr}
+    .two{grid-template-columns:1fr}
+    .two div + div{padding-left:0;border-left:none;border-top:1px solid var(--line)}
+    .foot-big{letter-spacing:.1em}
+  }
+</style>
+</head>
+<body>
+
+<p class="demo-bar">Концепт-демо магазина для SSW · автор <a href="https://svirryda.github.io/portfolio/" target="_blank" rel="noopener">Анна Свирида</a> · не официальный сайт · фото и тексты — из Instagram бренда, цены — примеры</p>
+
+<header>
+  <div class="wrap bar">
+    <nav aria-label="Разделы">
+      <a class="mono" href="#catalog">Каталог</a>
+      <a class="mono" href="#look">Afina</a>
+      <a class="mono" href="#about">О бренде</a>
+      <a class="mono" href="#service">Примерка</a>
+    </nav>
+    <a class="logo" href="#top" aria-label="SSW — наверх">SSW</a>
+    <div class="bar-r">
+      <button class="cart-btn mono" type="button" id="cartOpen" aria-label="Открыть примерочную">Примерка <span class="count" id="cartCount">0</span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero" style="padding:0">
+    <div class="hero-l">
+      <div class="hero-word" aria-hidden="true">
+        <span>SS</span><span class="i">W.</span>
+        <i class="slash"></i>
+      </div>
+      <div class="hero-copy">
+        <span class="mono">Минск · платья · смелый крой</span>
+        <h1>Мы создаём вещи для тех, кто <em>не хочет повторяться</em>.</h1>
+        <p>Каждое платье создано с вниманием к деталям и любовью к своему делу.</p>
+        <div class="cta">
+          <a class="btn btn-fill" href="#catalog">Смотреть каталог</a>
+          <a class="btn btn-line" href="#service">Бесплатная примерка</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-r">
+      <img src="img/muze.jpg" alt="Модель в коричневом мини-платье Muze на одно плечо с вырезом на талии" width="552" height="821">
+      <div class="caption"><b>Muze</b><span>образ, который будто сшит для вас</span></div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true"><div class="marquee-in" id="marquee"></div></div>
+
+  <!-- ===== КАТАЛОГ ===== -->
+  <section id="catalog">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="mono">Каталог</span>
+          <h2>Модели на любой <em>вкус и случай</em></h2>
+        </div>
+        <div class="filters" role="group" aria-label="Фильтр каталога">
+          <button type="button" data-f="all" aria-pressed="true">Все</button>
+          <button type="button" data-f="мини" aria-pressed="false">Мини</button>
+          <button type="button" data-f="макси" aria-pressed="false">Макси</button>
+          <button type="button" data-f="спина" aria-pressed="false">Открытая спина</button>
+        </div>
+      </div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <!-- ===== МАНИФЕСТ ===== -->
+  <section class="manifest" id="about">
+    <div class="wrap">
+      <div class="rv">
+        <span class="mono">О бренде</span>
+        <h2>Дерзость<br>и <em>утончённость</em></h2>
+        <blockquote>Каждая из нас хочет быть единственной и особенной. SSW поможет вам в этом.</blockquote>
+      </div>
+      <div>
+        <div class="pillar rv"><b>01</b><div><h3>Смелый крой</h3><p>Асимметрия, драпировка, выразительные вырезы и открытая спина — у каждой модели свой характер.</p></div></div>
+        <div class="pillar rv"><b>02</b><div><h3>Эксклюзивные образы</h3><p>Платье подчёркивает вашу индивидуальность, фигуру и настроение.</p></div></div>
+        <div class="pillar rv"><b>03</b><div><h3>Примерка с заботой</h3><p>Бесплатная доставка с примеркой по Минску: привезём несколько моделей, чтобы вы выбрали ту самую.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ОБРАЗ: AFINA ===== -->
+  <div class="look" id="look">
+    <div class="look-ph">
+      <span class="num" aria-hidden="true">01</span>
+      <img src="img/afina-antique.jpg" alt="Модель в чёрном платье Afina на фоне античных руин" loading="lazy" width="552" height="821">
+    </div>
+    <div class="look-txt rv">
+      <span class="mono">Модель в центре внимания</span>
+      <h2><em>Afina</em> — два образа в одном платье</h2>
+      <p>Элегантная модель с лаконичной драпировкой и выразительным вырезом — идеальный баланс дерзости и утончённости. Верх легко снимается и становится самостоятельным топом.</p>
+      <div class="two">
+        <div><b>Со шарфиком</b><span>элегантный вечерний образ</span></div>
+        <div><b>Без шарфика</b><span>более смелый и открытый вариант</span></div>
+      </div>
+      <p style="font-size:14px">Цвета: белый, чёрный, голубой.</p>
+      <div class="cta" style="margin-top:0">
+        <button class="btn btn-fill" type="button" data-open="afina">Выбрать цвет и размер</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== СЕРВИС ===== -->
+  <section id="service">
+    <div class="wrap">
+      <div class="sec-head"><div><span class="mono">Сервис</span><h2>Примерка <em>и размеры</em></h2></div></div>
+      <div class="service">
+        <div class="rv">
+          <table>
+            <thead><tr><th>Размер</th><th>Грудь</th><th>Талия</th><th>Бёдра</th></tr></thead>
+            <tbody>
+              <tr><td>XS</td><td>80–84</td><td>62–66</td><td>88–92</td></tr>
+              <tr><td>S</td><td>84–88</td><td>66–70</td><td>92–96</td></tr>
+              <tr><td>M</td><td>88–92</td><td>70–74</td><td>96–100</td></tr>
+              <tr><td>L</td><td>92–96</td><td>74–78</td><td>100–104</td></tr>
+            </tbody>
+          </table>
+          <p class="todo" style="margin-top:14px">* типовая сетка — на рабочем сайте будет размерная сетка SSW</p>
+        </div>
+        <div class="rv">
+          <div class="svc"><h3>Бесплатная примерка по Минску</h3><p>Соберите в «Примерку» до нескольких моделей — привезём их вам, чтобы вы выбрали ту самую.</p></div>
+          <div class="svc"><h3>Подбор размера</h3><p>Сомневаетесь в размере? Напишите в директ — подберём размер и ответим на все вопросы.</p></div>
+          <div class="svc"><h3>Оплата и доставка по Беларуси</h3><p>Условия оплаты и отправки. <span class="todo">[из раздела «Оплата» бренда]</span></p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ЛЕНТА ===== -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head"><div><span class="mono">Instagram</span><h2><em>@ssw.brand</em></h2></div>
+        <a class="btn btn-line" href="https://www.instagram.com/ssw.brand/" target="_blank" rel="noopener">Открыть профиль</a></div>
+    </div>
+    <div class="feed" id="feed"></div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-big" aria-hidden="true">SSW</div>
+    <div class="foot-row">
+      <span>Минск · платья · смелый крой · эксклюзивные образы</span>
+      <a href="https://www.instagram.com/ssw.brand/" target="_blank" rel="noopener">Instagram @ssw.brand</a>
+      <span>Концепт сайта: <a href="https://svirryda.github.io/portfolio/" target="_blank" rel="noopener">Анна Свирида</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- карточка модели -->
+<dialog id="product" aria-label="Модель">
+  <button class="x" type="button" data-close aria-label="Закрыть">✕</button>
+  <div class="pd">
+    <div class="pd-gal"><img id="pdImg" src="" alt=""><div class="thumbs" id="pdThumbs"></div></div>
+    <div class="pd-info">
+      <span class="mono" id="pdKind"></span>
+      <h3 id="pdName"></h3>
+      <span class="price" id="pdPrice"></span>
+      <p id="pdDesc"></p>
+      <div><p class="mono opt-label">Цвет</p><div class="opts" id="pdColors"></div></div>
+      <div><p class="mono opt-label">Размер</p><div class="opts" id="pdSizes"></div></div>
+      <p class="hint" id="pdHint" aria-live="polite"></p>
+      <button class="btn btn-fill" type="button" id="pdAdd">Добавить в примерку</button>
+      <p class="pd-note"><b>Бесплатная примерка по Минску.</b> Привезём несколько моделей — выберете ту самую.</p>
+    </div>
+  </div>
+</dialog>
+
+<!-- примерочная (корзина) -->
+<div class="drawer-bg" id="drawerBg"></div>
+<aside class="drawer" id="drawer" aria-label="Примерка">
+  <div class="dr-head"><h3>Ваша примерка</h3><button class="x" style="position:static" type="button" id="cartClose" aria-label="Закрыть">✕</button></div>
+  <div class="dr-list" id="cartList"></div>
+  <div class="dr-foot">
+    <div class="total"><span>Итого</span><span id="cartTotal">0</span></div>
+    <small>Доставка с примеркой по Минску — бесплатно.</small>
+    <button class="btn btn-fill" type="button" id="toCheckout">Заказать примерку</button>
+  </div>
+</aside>
+
+<!-- заявка -->
+<dialog id="checkout" aria-label="Заявка на примерку">
+  <button class="x" type="button" data-close aria-label="Закрыть">✕</button>
+  <form class="co" id="coForm" novalidate>
+    <span class="mono" style="color:var(--accent)">Бесплатная примерка</span>
+    <h3>Привезём <em>вам</em></h3>
+    <p class="lead" id="coSummary"></p>
+    <label>Имя<input name="name" required autocomplete="name"></label>
+    <label>Телефон или Instagram<input name="contact" required></label>
+    <label>Когда удобно
+      <select name="when"><option>Сегодня вечером</option><option>Завтра</option><option>В выходные</option><option>Согласуем в директе</option></select>
+    </label>
+    <p class="hint" id="coHint" aria-live="polite"></p>
+    <button class="btn btn-fill" type="submit">Отправить заявку</button>
+    <p class="note">Демо: данные никуда не отправляются. На рабочем сайте заявка сразу придёт менеджеру SSW.</p>
+  </form>
+  <div class="co done" id="coDone" hidden>
+    <span class="mark">✓</span>
+    <h3>Заявка <em>принята</em></h3>
+    <p style="color:var(--ink-soft)">В рабочей версии менеджер SSW связался бы с вами, чтобы согласовать время примерки.</p>
+    <button class="btn btn-line" type="button" data-close>Вернуться в каталог</button>
+  </div>
+</dialog>
+
+<script>
+(function(){
+  "use strict";
+  document.body.classList.add("js");
+  var CUR = "BYN";
+  var SW = {"белый":"#F3EFE8","чёрный":"#111","голубой":"#A9D3EE","коричневый":"#4A2A1E","красный":"#B3141E"};
+
+  /* Afina и Muze — названия бренда; остальные подписаны по крою, названия моделей подставит бренд. Цены — примеры. */
+  var PRODUCTS = [
+    {id:"afina", name:"Afina", branded:true, kind:"Драпировка и выразительный вырез", len:"макси", price:420, badge:"Хит",
+     colors:[["белый","afina-white"],["чёрный","afina-black"],["голубой",null]],
+     desc:"Лаконичная драпировка и выразительный вырез. Можно носить по-разному: со шарфиком — вечерний образ, без — смелый. Верх снимается и становится самостоятельным топом."},
+    {id:"muze", name:"Muze", branded:true, kind:"Мини на одно плечо с вырезом", len:"мини", price:340, badge:"Новинка",
+     colors:[["коричневый","muze"]],
+     desc:"Образ, который будто сшит специально для вас: подчёркивает индивидуальность, фигуру и настроение."},
+    {id:"halter", name:"халтер", kind:"Макси с халтером", len:"макси", price:360,
+     colors:[["чёрный","halter-black"],["красный","halter-red"],["белый","halter-white"]],
+     desc:"Высокий халтер, открытые плечи и силуэт по фигуре в пол."},
+    {id:"cowl", name:"с драпировкой", kind:"Халтер с драпированным вырезом", len:"макси", price:380, back:true,
+     colors:[["красный","red-cowl"],["чёрный","black-openback"]],
+     desc:"Мягкая драпировка на груди и полностью открытая спина."},
+    {id:"keyhole", name:"с перекрёстным лифом", kind:"Макси с вырезом и открытой спиной", len:"макси", price:390, back:true,
+     colors:[["чёрный","keyhole"]], extra:["keyhole-back"],
+     desc:"Перекрёстные бретели, выразительный вырез спереди и открытая спина."},
+    {id:"strappy", name:"с шнуровкой на спине", kind:"Макси с длинным рукавом", len:"макси", price:410, back:true,
+     colors:[["чёрный","strappy"]], extra:["strappy-back"],
+     desc:"Закрытый перед, длинные рукава и перекрещенные завязки на открытой спине."},
+    {id:"slit", name:"на одно плечо", kind:"Макси с высоким разрезом", len:"макси", price:370,
+     colors:[["коричневый","brown-slit"]],
+     desc:"Асимметричный лиф с вырезом и высокий разрез по ноге."},
+    {id:"stand", name:"с воротником-стойкой", kind:"Приталенное макси", len:"макси", price:320,
+     colors:[["коричневый","brown-halter"],["голубой","blue-maxi"]],
+     desc:"Воротник-стойка и силуэт по фигуре — лаконично и собранно."},
+    {id:"drape", name:"с драпировкой", kind:"Мини со шлейфом-драпировкой", len:"мини", price:330,
+     colors:[["голубой","blue-mini"]],
+     desc:"Драпированное мини с вырезом на талии и струящимся шлейфом."}
+  ];
+  var byId = {}; PRODUCTS.forEach(function(p){ byId[p.id] = p; });
+  var SIZES = ["XS","S","M","L"];
+  function money(n){ return n.toLocaleString("ru-RU") + " " + CUR; }
+  function src(k){ return "img/" + k + ".jpg"; }
+  function title(p){ return p.branded ? "<em>" + p.name + "</em>" : "Платье <em>" + p.name + "</em>"; }
+  function plain(p){ return p.branded ? p.name : "Платье " + p.name; }
+  function photos(p){
+    var a = p.colors.map(function(c){ return c[1]; }).filter(Boolean);
+    return a.concat(p.extra || []);
+  }
+
+  var phrase = "платья <i>✕</i> смелый крой <i>✕</i> эксклюзивные образы <i>✕</i> бесплатная примерка по Минску <i>✕</i> ";
+  document.getElementById("marquee").innerHTML = "<span>" + phrase.repeat(3) + "</span><span>" + phrase.repeat(3) + "</span>";
+
+  /* каталог */
+  var grid = document.getElementById("grid");
+  function renderGrid(f){
+    grid.innerHTML = PRODUCTS.filter(function(p){
+      return f === "all" || (f === "спина" ? p.back : p.len === f);
+    }).map(function(p){
+      var ph = photos(p);
+      return '<button class="card rv" type="button" data-open="' + p.id + '">' +
+        '<div class="ph"><img src="' + src(ph[0]) + '" alt="' + plain(p) + '" loading="lazy">' +
+          (ph[1] ? '<img class="alt" src="' + src(ph[1]) + '" alt="" loading="lazy">' : '') +
+          (p.badge ? '<span class="badge mono">' + p.badge + '</span>' : '') +
+          '<span class="quick mono">Выбрать размер</span></div>' +
+        '<div class="card-meta"><h3>' + title(p) + '</h3><span class="price">' + money(p.price) + '</span></div>' +
+        '<span class="kind">' + p.kind + '<span class="dots">' +
+          p.colors.map(function(c){ return '<i style="background:' + SW[c[0]] + '" title="' + c[0] + '"></i>'; }).join("") +
+        '</span></span></button>';
+    }).join("");
+    observe(grid.querySelectorAll(".rv"));
+  }
+  document.querySelectorAll(".filters button").forEach(function(b){
+    b.addEventListener("click", function(){
+      document.querySelectorAll(".filters button").forEach(function(x){ x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+      renderGrid(b.dataset.f);
+    });
+  });
+
+  /* лента */
+  document.getElementById("feed").innerHTML = ["afina-white","red-cowl","keyhole-back","blue-mini","brown-slit","strappy-back"].map(function(k){
+    return '<a href="https://www.instagram.com/ssw.brand/" target="_blank" rel="noopener" aria-label="SSW в Instagram"><img src="' + src(k) + '" alt="" loading="lazy"></a>';
+  }).join("");
+
+  /* появление при скролле */
+  var io = "IntersectionObserver" in window ? new IntersectionObserver(function(es){
+    es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
+  }, {threshold:.1}) : null;
+  function observe(list){
+    Array.prototype.forEach.call(list, function(el, i){
+      el.style.transitionDelay = (i % 3) * 90 + "ms";
+      io ? io.observe(el) : el.classList.add("in");
+    });
+  }
+  observe(document.querySelectorAll(".rv"));
+  renderGrid("all");
+
+  /* примерка (корзина): хранится в браузере, если он позволяет */
+  var cart = [];
+  try { cart = JSON.parse(localStorage.getItem("ssw-demo-cart") || "[]").filter(function(l){ return byId[l.id]; }); } catch(e){ cart = []; }
+  function save(){ try { localStorage.setItem("ssw-demo-cart", JSON.stringify(cart)); } catch(e){} }
+
+  var countEl = document.getElementById("cartCount");
+  function renderCart(){
+    var n = 0, sum = 0;
+    cart.forEach(function(l){ n += l.q; sum += l.q * byId[l.id].price; });
+    countEl.textContent = n;
+    document.getElementById("cartTotal").textContent = money(sum);
+    document.getElementById("toCheckout").disabled = n === 0;
+    var list = document.getElementById("cartList");
+    if (!cart.length){ list.innerHTML = '<div class="empty"><b>Пока пусто</b>Добавьте модели, которые хотите примерить</div>'; return; }
+    list.innerHTML = cart.map(function(l, i){
+      var p = byId[l.id], c = p.colors.filter(function(x){ return x[0] === l.c; })[0];
+      var img = (c && c[1]) || photos(p)[0];
+      return '<div class="line"><img src="' + src(img) + '" alt="">' +
+        '<div><h4>' + plain(p) + '</h4><small>' + l.c + ' · ' + l.s + ' · ' + money(p.price) + '</small>' +
+        '<div class="qty"><button type="button" data-q="-1" data-i="' + i + '" aria-label="Меньше">−</button><span>' + l.q + '</span><button type="button" data-q="1" data-i="' + i + '" aria-label="Больше">+</button></div></div>' +
+        '<button class="rm" type="button" data-rm="' + i + '">Убрать</button></div>';
+    }).join("");
+  }
+  document.getElementById("cartList").addEventListener("click", function(e){
+    var t = e.target.closest("button"); if (!t) return;
+    if (t.dataset.rm !== undefined) cart.splice(+t.dataset.rm, 1);
+    if (t.dataset.q){ var l = cart[+t.dataset.i]; l.q += +t.dataset.q; if (l.q < 1) cart.splice(+t.dataset.i, 1); }
+    save(); renderCart();
+  });
+  var opener = null;
+  function openCart(){ opener = document.activeElement; document.body.classList.add("cart-open"); document.getElementById("cartClose").focus(); }
+  function closeCart(){ if (!document.body.classList.contains("cart-open")) return; document.body.classList.remove("cart-open"); if (opener && opener.focus) opener.focus(); }
+  document.getElementById("cartOpen").addEventListener("click", openCart);
+  document.getElementById("cartClose").addEventListener("click", closeCart);
+  document.getElementById("drawerBg").addEventListener("click", closeCart);
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape") closeCart(); });
+
+  /* карточка модели */
+  var pd = document.getElementById("product"), cur = null, size = null, color = null;
+  var pdImg = document.getElementById("pdImg");
+  function show(k){
+    pdImg.src = src(k); pdImg.alt = plain(cur);
+    document.querySelectorAll("#pdThumbs button").forEach(function(b){ b.setAttribute("aria-pressed", b.dataset.k === k ? "true" : "false"); });
+  }
+  function pressed(box, btn){ box.querySelectorAll("button").forEach(function(x){ x.setAttribute("aria-pressed", x === btn ? "true" : "false"); }); }
+  function openProduct(id){
+    var p = byId[id]; cur = p; size = null; color = p.colors[0][0];
+    var ph = photos(p);
+    document.getElementById("pdThumbs").innerHTML = ph.length > 1 ? ph.map(function(k){
+      return '<button type="button" data-k="' + k + '" aria-label="Фото"><img src="' + src(k) + '" alt=""></button>';
+    }).join("") : "";
+    show(ph[0]);
+    document.getElementById("pdKind").textContent = p.kind;
+    document.getElementById("pdName").innerHTML = title(p);
+    document.getElementById("pdPrice").textContent = money(p.price);
+    document.getElementById("pdDesc").textContent = p.desc;
+    document.getElementById("pdColors").innerHTML = p.colors.map(function(c, i){
+      return '<button type="button" data-c="' + c[0] + '" aria-pressed="' + (i === 0) + '"><span class="sw" style="background:' + SW[c[0]] + '"></span>' + c[0] + '</button>';
+    }).join("");
+    document.getElementById("pdSizes").innerHTML = SIZES.map(function(s){ return '<button type="button" aria-pressed="false">' + s + '</button>'; }).join("");
+    var h = document.getElementById("pdHint"); h.textContent = ""; h.className = "hint";
+    pd.showModal();
+  }
+  document.getElementById("pdThumbs").addEventListener("click", function(e){ var b = e.target.closest("button"); if (b) show(b.dataset.k); });
+  document.getElementById("pdColors").addEventListener("click", function(e){
+    var b = e.target.closest("button"); if (!b) return;
+    color = b.dataset.c; pressed(this, b);
+    var c = cur.colors.filter(function(x){ return x[0] === color; })[0];
+    var h = document.getElementById("pdHint");
+    if (c[1]) { show(c[1]); h.textContent = ""; } else { h.className = "hint"; h.textContent = "Фото в этом цвете бренд добавит в карточку"; }
+  });
+  document.getElementById("pdSizes").addEventListener("click", function(e){
+    var b = e.target.closest("button"); if (!b) return;
+    size = b.textContent; pressed(this, b);
+    var h = document.getElementById("pdHint"); if (h.classList.contains("err")) { h.textContent = ""; h.className = "hint"; }
+  });
+  document.getElementById("pdAdd").addEventListener("click", function(){
+    var h = document.getElementById("pdHint");
+    if (!size){ h.textContent = "Выберите размер"; h.className = "hint err"; return; }
+    var ex = cart.filter(function(l){ return l.id === cur.id && l.s === size && l.c === color; })[0];
+    ex ? ex.q++ : cart.push({id:cur.id, s:size, c:color, q:1});
+    save(); renderCart();
+    countEl.classList.add("bump"); setTimeout(function(){ countEl.classList.remove("bump"); }, 250);
+    pd.close(); openCart();
+  });
+  document.addEventListener("click", function(e){
+    var o = e.target.closest("[data-open]"); if (o) openProduct(o.dataset.open);
+    var c = e.target.closest("[data-close]"); if (c) c.closest("dialog").close();
+  });
+  document.querySelectorAll("dialog").forEach(function(d){
+    d.addEventListener("click", function(e){ if (e.target === d) d.close(); });
+  });
+
+  /* заявка на примерку (демо: без отправки и без оплаты) */
+  var co = document.getElementById("checkout"), form = document.getElementById("coForm"), done = document.getElementById("coDone");
+  document.getElementById("toCheckout").addEventListener("click", function(){
+    var n = cart.reduce(function(s, l){ return s + l.q; }, 0);
+    document.getElementById("coSummary").textContent = "В примерке: " + n + " " + (n % 10 === 1 && n % 100 !== 11 ? "модель" : (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? "модели" : "моделей")) + ". Доставка по Минску бесплатно.";
+    closeCart(); form.hidden = false; done.hidden = true;
+    var h = document.getElementById("coHint"); h.textContent = ""; h.className = "hint";
+    co.showModal();
+  });
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var f = form.elements;
+    if (!f.namedItem("name").value.trim() || !f.namedItem("contact").value.trim()){
+      var h = document.getElementById("coHint"); h.textContent = "Заполните имя и контакт"; h.className = "hint err"; return;
+    }
+    form.reset(); form.hidden = true; done.hidden = false;
+    cart = []; save(); renderCart();
+  });
+
+  renderCart();
+})();
+</script>
+</body>
+</html>

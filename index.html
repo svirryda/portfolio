@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Анна Свирида — разработчик полного цикла</title>
 <meta name="description" content="Сайты, Telegram-боты, Android-приложения и обучающие игры под ключ: придумать, собрать, установить и поддерживать.">
-<meta name="theme-color" content="#0D0A0C">
+<meta name="theme-color" content="#0F0C0A">
 <meta property="og:title" content="Анна Свирида — разработчик полного цикла">
 <meta property="og:description" content="Беру задачу — отдаю продукт. Сайты, боты, приложения и игры под ключ.">
 <meta property="og:url" content="https://svirryda.github.io/portfolio/">
@@ -14,22 +14,27 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0D0A0C;
-    --panel:#161014;
-    --panel-2:#120E11;
-    --wine:#8A2432;
-    --wine-hover:#A02A3C;
-    --wine-bright:#C75D6C;
-    --wine-soft:rgba(179,54,74,.13);
-    --ink:#EFE9E7;
-    --ink-soft:#A79EA0;
-    --line:rgba(239,233,231,.1);
-    --line-strong:rgba(239,233,231,.22);
-    --good:#4E9B6F;
-    --warn:#C08A3E;
-    --shadow:0 16px 36px -20px rgba(0,0,0,.7);
+    --bg:#0F0C0A;
+    --panel:#1A1410;
+    --panel-2:#15100C;
+    --wine:#C2762C;
+    --wine-hover:#D98B3C;
+    --wine-bright:#F0B169;
+    --wine-soft:rgba(217,136,58,.13);
+    --ink:#F4ECE2;
+    --ink-soft:#B2A496;
+    --line:rgba(244,236,226,.1);
+    --line-strong:rgba(244,236,226,.22);
+    --shadow:0 16px 36px -20px rgba(0,0,0,.72);
+    --glow:rgba(194,118,44,.18);
+    --grid:rgba(244,236,226,.028);
+    --li:#E0D4C6;
+    --on-accent:#1A1006;
+    --font-display:"Unbounded","IBM Plex Sans",sans-serif;
+    --header-bg:rgba(15,12,10,.85);
     --font-sans:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
     --font-mono:"IBM Plex Mono",Consolas,monospace;
   }
@@ -45,10 +50,12 @@
   img{display:block;max-width:100%}
   a{color:var(--wine-bright)}
   a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--wine-bright);outline-offset:3px;border-radius:4px}
-  .skip{position:absolute;left:-999px;top:8px;background:var(--wine);color:#fff;padding:10px 16px;border-radius:8px;z-index:200}
+  .skip{position:absolute;left:-999px;top:8px;background:var(--wine);color:var(--on-accent);padding:10px 16px;border-radius:8px;z-index:200}
   .skip:focus{left:8px}
   .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
   section{padding:78px 0}
+  section[id]{scroll-margin-top:76px}
+  h1,h2,h3{font-family:var(--font-display)}
   h2{font-weight:700;font-size:clamp(26px,3.6vw,36px);line-height:1.2;letter-spacing:-.01em;text-wrap:balance}
   .sec-head{max-width:660px;display:flex;flex-direction:column;gap:12px;margin-bottom:40px}
   .eyebrow{
@@ -68,14 +75,14 @@
   /* ======= шапка ======= */
   header{
     position:sticky;top:0;z-index:60;
-    background:rgba(13,10,12,.85);
+    background:var(--header-bg);
     -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
     border-bottom:1px solid var(--line);
   }
   .bar{max-width:1080px;margin:0 auto;padding:13px 22px;display:flex;align-items:center;gap:20px}
   .logo{display:flex;align-items:center;gap:11px;font-weight:600;color:var(--ink);text-decoration:none}
   .logo i{
-    width:34px;height:34px;border-radius:8px;background:var(--wine);color:#fff;
+    width:34px;height:34px;border-radius:8px;background:var(--wine);color:var(--on-accent);
     display:grid;place-items:center;font-style:normal;font-family:var(--font-mono);font-weight:500;font-size:16px;
   }
   nav{margin-left:auto;display:flex;gap:22px}
@@ -93,7 +100,7 @@
     padding:12px 22px;transition:transform .18s ease,background .18s ease,border-color .18s ease;
   }
   .btn:hover{transform:translateY(-1px)}
-  .btn-wine{background:var(--wine);color:#fff}
+  .btn-wine{background:var(--wine);color:var(--on-accent)}
   .btn-wine:hover{background:var(--wine-hover)}
   .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line-strong)}
   .btn-ghost:hover{border-color:var(--wine-bright)}
@@ -145,6 +152,18 @@
   .hero .sub{margin-top:22px;max-width:54ch;font-size:17px;color:var(--ink-soft);text-wrap:pretty}
   .nb{white-space:nowrap}
   .hero-cta{margin-top:32px;display:flex;gap:14px;flex-wrap:wrap}
+  .hero .sub-2{margin-top:16px;font-size:15px}
+  .chips{margin-top:18px;list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+  .chips li{
+    font-family:var(--font-mono);font-size:12.5px;letter-spacing:.02em;color:var(--ink);
+    background:var(--wine-soft);border:1px solid rgba(199,93,108,.3);border-radius:999px;padding:6px 13px;
+  }
+  .trust{
+    margin-top:22px;display:flex;flex-wrap:wrap;gap:8px 18px;
+    font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);
+  }
+  .trust span{display:flex;align-items:center;gap:8px}
+  .trust span::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--wine-bright);flex:none}
   @media (prefers-reduced-motion:no-preference){
     .hero-copy > *{animation:rise .6s cubic-bezier(.22,1,.36,1) both}
     .hero-copy > *:nth-child(2){animation-delay:.07s}
@@ -163,7 +182,13 @@
     max-width:1080px;margin:0 auto;padding:0 22px;
     display:grid;grid-template-columns:repeat(4,1fr);gap:18px;
   }
-  .stat{display:flex;flex-direction:column;gap:2px}
+  .stat{display:flex;align-items:center;gap:13px}
+  .stat > div{display:flex;flex-direction:column;gap:2px;min-width:0}
+  .st-ico{
+    flex:none;width:38px;height:38px;border-radius:11px;display:grid;place-items:center;
+    background:var(--wine-soft);border:1px solid rgba(199,93,108,.26);color:var(--wine-bright);
+  }
+  .st-ico svg{width:19px;height:19px}
   .stat b{
     font-family:var(--font-mono);font-weight:500;font-size:clamp(24px,3vw,32px);
     color:var(--wine-bright);font-variant-numeric:tabular-nums;line-height:1.15;
@@ -175,9 +200,20 @@
     display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(24px,4vw,46px);align-items:center;
     background:var(--panel);border:1px solid var(--line);border-radius:18px;
     padding:clamp(22px,3.4vw,36px);
-    transition:border-color .25s ease;
+    transition:border-color .25s ease,transform .25s ease;
   }
-  .case:hover{border-color:rgba(199,93,108,.35)}
+  .case:hover{border-color:rgba(199,93,108,.35);transform:translateY(-3px)}
+  .case{will-change:transform}
+  .filters{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:26px}
+  .f-btn{
+    font:500 13px/1 var(--font-sans);color:var(--ink-soft);cursor:pointer;
+    background:transparent;border:1px solid var(--line-strong);border-radius:999px;padding:9px 16px;
+    transition:color .2s ease,border-color .2s ease,background .2s ease;
+  }
+  .f-btn:hover{color:var(--ink);border-color:rgba(199,93,108,.45)}
+  .f-btn.is-on{color:var(--on-accent);background:var(--wine);border-color:var(--wine)}
+  .more-wrap{display:flex;justify-content:center;margin-top:28px}
+  .case[hidden]{display:none}
   .case + .case{margin-top:18px}
   .case > *{min-width:0}
   .case.flip .case-media{order:-1}
@@ -191,7 +227,7 @@
   .case h3{font-size:clamp(19px,2.3vw,23px);font-weight:600;line-height:1.3;margin-bottom:10px;text-wrap:balance}
   .case .task{color:var(--ink-soft);font-size:15px;margin-bottom:10px}
   .case .task b{color:var(--ink);font-weight:600}
-  .case ul{margin:0 0 16px;padding-left:18px;display:flex;flex-direction:column;gap:5px;font-size:14.5px;color:#DDD5D3}
+  .case ul{margin:0 0 16px;padding-left:18px;display:flex;flex-direction:column;gap:5px;font-size:14.5px;color:var(--li)}
   .case ul li::marker{color:var(--wine-bright)}
   .passport{
     font-family:var(--font-mono);font-size:12px;color:var(--ink-soft);
@@ -211,7 +247,7 @@
   /* мокапы */
   .mock-chat{width:min(100%,300px);margin:0 auto;background:#101418;border:1px solid var(--line-strong);border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
   .mock-chat .mc-head{background:#18202B;color:#E7ECF2;font-size:12px;font-weight:600;padding:10px 14px;display:flex;align-items:center;gap:8px}
-  .mock-chat .mc-head i{width:22px;height:22px;border-radius:50%;background:var(--wine);color:#fff;display:grid;place-items:center;font-style:normal;font-size:11px}
+  .mock-chat .mc-head i{width:22px;height:22px;border-radius:50%;background:var(--wine);color:var(--on-accent);display:grid;place-items:center;font-style:normal;font-size:11px}
   .mock-chat .mc-body{padding:12px;display:flex;flex-direction:column;gap:7px;font-size:12px;line-height:1.45}
   .mock-chat .m{max-width:86%;border-radius:11px;padding:7px 11px;background:#1D2733;color:#DDE3EA}
   .mock-chat .m.me{align-self:flex-end;background:#20512F;color:#E1F2E4}
@@ -220,7 +256,7 @@
   .mock-flow{display:flex;flex-direction:column;gap:9px;width:min(100%,330px);margin:0 auto}
   .mock-flow .st{
     background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:12px 15px;
-    font-size:13.5px;display:flex;align-items:center;gap:10px;color:#DDD5D3;
+    font-size:13.5px;display:flex;align-items:center;gap:10px;color:var(--li);
   }
   .mock-flow .st i{font-style:normal;font-family:var(--font-mono);font-size:11px;color:var(--wine-bright);background:var(--wine-soft);border-radius:7px;padding:3px 8px;flex:none}
   .mock-flow .arr{text-align:center;color:var(--wine-bright);font-size:14px;line-height:.6}
@@ -259,7 +295,7 @@
   .about-band{background:var(--panel-2);border-block:1px solid var(--line)}
   .about{display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:start;max-width:780px}
   .ava{
-    position:relative;width:76px;height:76px;border-radius:14px;background:var(--wine);color:#fff;
+    position:relative;width:76px;height:76px;border-radius:14px;background:var(--wine);color:var(--on-accent);
     display:grid;place-items:center;font-family:var(--font-mono);font-size:28px;flex:none;overflow:hidden;
   }
   .ava img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1);transition:filter .5s ease}
@@ -292,7 +328,7 @@
   }
   #lightbox .lb-close{
     position:absolute;top:-14px;right:-14px;width:38px;height:38px;border-radius:50%;
-    background:var(--wine);color:#fff;border:none;cursor:pointer;
+    background:var(--wine);color:var(--on-accent);border:none;cursor:pointer;
     font:600 16px var(--font-mono);display:grid;place-items:center;
   }
   #lightbox .lb-close:hover{background:var(--wine-hover)}
@@ -333,7 +369,7 @@
       color:var(--ink);text-decoration:none;font-weight:500;
     }
     .sheet a:hover{background:var(--wine-soft)}
-    .sheet .sheet-cta{background:var(--wine);color:#fff;font-weight:600;margin-top:6px}
+    .sheet .sheet-cta{background:var(--wine);color:var(--on-accent);font-weight:600;margin-top:6px}
     section{padding:60px 0}
     .hero{padding:72px 0 64px}
     .hero-in{grid-template-columns:1fr}
@@ -380,11 +416,19 @@
       <div class="hero-copy">
         <p class="eyebrow">Разработчик полного цикла</p>
         <h1>Беру задачу — отдаю <em>продукт</em><span class="cursor" aria-hidden="true">▍</span></h1>
-        <p class="sub">Приветствую, гость. Меня&nbsp;зовут Анна, <span class="nb">инженер-программист полного цикла</span>. Со&nbsp;мной команда: дизайнер, <span class="nb">3D-художник</span> и&nbsp;разработчики. Создадим для&nbsp;Вас <span class="nb">Telegram-бота</span>, мобильное&nbsp;приложение, ПО&nbsp;для любого&nbsp;устройства,&nbsp;сайт. Подготовлю&nbsp;концепт и&nbsp;идею. Соберём и&nbsp;создадим продукт от&nbsp;и&nbsp;до. Подключим к&nbsp;нужной&nbsp;Вам системе, сайту, бизнесу. Свои проекты поддерживаем на&nbsp;протяжении 5&nbsp;лет&nbsp;эксплуатации.</p>
+        <p class="sub">Приветствую, гость. Меня&nbsp;зовут Анна, <span class="nb">инженер-программист полного цикла</span>. Со&nbsp;мной команда: дизайнер, <span class="nb">3D-художник</span> и&nbsp;разработчики.</p>
+        <ul class="chips" aria-label="Что создаём">
+          <li>Сайты</li>
+          <li>Telegram-боты</li>
+          <li>Мобильные приложения</li>
+          <li>ПО для любого устройства</li>
+        </ul>
+        <p class="sub sub-2">Подготовлю концепт и&nbsp;идею. Соберём и&nbsp;создадим продукт от&nbsp;и&nbsp;до, подключим к&nbsp;нужной&nbsp;Вам системе, сайту, бизнесу. Свои проекты поддерживаем на&nbsp;протяжении 5&nbsp;лет&nbsp;эксплуатации.</p>
         <div class="hero-cta">
           <a class="btn btn-wine" href="https://t.me/svirryda" target="_blank" rel="noopener">Написать в Telegram</a>
           <a class="btn btn-ghost" href="#cases">Смотреть кейсы</a>
         </div>
+        <p class="trust"><span>Работаем с заведениями по всему миру</span><span>МЧС Беларуси</span></p>
       </div>
       <figure class="portrait">
         <img src="assets/photo.jpg" alt="Анна Свирида" width="900" height="1200">
@@ -396,10 +440,10 @@
   <!-- ===== ЦИФРЫ ===== -->
   <div class="stats" aria-label="Цифры">
     <div class="stats-in">
-      <div class="stat"><b data-target="6" data-suffix="">0</b><span>продуктов в эксплуатации</span></div>
-      <div class="stat"><b data-target="4" data-suffix="">0</b><span>платформы разработки</span></div>
-      <div class="stat"><b data-target="20" data-suffix="+">0+</b><span>сценариев в одной игре</span></div>
-      <div class="stat"><b data-target="15" data-suffix="">0</b><span>сборок в одном реверсе</span></div>
+      <div class="stat"><span class="st-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8.5 12 3 3 8.5v7L12 21l9-5.5Z"/><path d="M3 8.5 12 14l9-5.5"/><path d="M12 14v7"/></svg></span><div><b data-target="6" data-suffix="">0</b><span>продуктов работают у заказчиков</span></div></div>
+      <div class="stat"><span class="st-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 3 8l9 5 9-5Z"/><path d="M3 13l9 5 9-5"/></svg></span><div><b data-target="4" data-suffix="">0</b><span>платформы разработки</span></div></div>
+      <div class="stat"><span class="st-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="6" r="2.4"/><circle cx="7" cy="18" r="2.4"/><circle cx="17" cy="12" r="2.4"/><path d="M7 8.4v7.2M9.4 6h2.2a3 3 0 0 1 3 3v.6M9.4 18h2.2a3 3 0 0 0 3-3v-.6"/></svg></span><div><b data-target="20" data-suffix="+">0+</b><span>сценариев в одной игре</span></div></div>
+      <div class="stat"><span class="st-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11"/><path d="m8 10 4 4 4-4"/><path d="M4 17v2.5h16V17"/></svg></span><div><b data-target="15" data-suffix="">0</b><span>выпущенных сборок</span></div></div>
     </div>
   </div>
 
@@ -412,7 +456,15 @@
         <p class="lead">Каждый доведён до эксплуатации: стоит на планшетах, крутится на офисном ПК или продаёт услуги заказчика. Скриншоты открываются по клику.</p>
       </div>
 
-      <article class="case rv">
+      <div class="filters" role="group" aria-label="Фильтр кейсов">
+        <button type="button" class="f-btn is-on" data-filter="all">Все</button>
+        <button type="button" class="f-btn" data-filter="trainer">Тренажёры</button>
+        <button type="button" class="f-btn" data-filter="android">Android</button>
+        <button type="button" class="f-btn" data-filter="web">Веб</button>
+        <button type="button" class="f-btn" data-filter="bot">Боты</button>
+      </div>
+
+      <article data-kind="trainer" class="case rv">
         <div>
           <span class="case-tag">Интерактивный комплекс · экран + планшет</span>
           <h3>«Допрос» — подросток в роли следователя</h3>
@@ -426,7 +478,7 @@
         </div>
         <div class="case-media stack"><img src="assets/case-dopros.jpg" alt="Экран «Допроса»: задержанный подросток в допросной, вокруг веером варианты реплик следователя — поддержка, дружелюбие, логика, давление, молчание" loading="lazy" width="1280" height="660"><img src="assets/case-dopros-2.jpg" alt="Экран «Допроса»: список тем допроса — как оказался у гаражей, что в свёртке, мама, что будет дальше — и шкала стресса" loading="lazy" width="1280" height="645"></div>
       </article>
-      <article class="case flip rv">
+      <article data-kind="web" class="case flip rv">
         <div>
           <span class="case-tag">Веб · корпоративный сайт</span>
           <h3>Сайт производителя интерактивных центров безопасности</h3>
@@ -440,7 +492,7 @@
         </div>
         <div class="case-media"><img src="assets/case-kventin-map.png" alt="Раздел сайта «Наши объекты по всей Беларуси»: карта со светящимися точками городов и счётчик 16 городов" loading="lazy" width="1600" height="900"></div>
       </article>
-      <article class="case rv">
+      <article data-kind="android" class="case rv">
         <div>
           <span class="case-tag">Android · обучающая игра</span>
           <h3>«НЕ ВЕДИСЬ» — игра-тренажёр против мошенников</h3>
@@ -454,7 +506,7 @@
         </div>
         <div class="case-media"><img src="assets/case-nevedis.png" alt="Скриншот игры: обучение «Сейчас мы научимся распознавать мошенников в переписке»" loading="lazy" width="1510" height="723"></div>
       </article>
-      <article class="case flip rv">
+      <article data-kind="android" class="case flip rv">
         <div>
           <span class="case-tag">Android · ПО для оборудования</span>
           <h3>Приложение тренажёра первой помощи</h3>
@@ -468,7 +520,7 @@
         </div>
         <div class="case-media"><img src="assets/case-pak.png" alt="Скриншот приложения: «Тренажёр по отработке приёмов первой помощи», инструктор и разделы" loading="lazy" width="1600" height="739"></div>
       </article>
-      <article class="case rv">
+      <article data-kind="web" class="case rv">
         <div>
           <span class="case-tag">Коммерческое ПО · демо</span>
           <h3>Хронометраж для квест-площадки</h3>
@@ -482,7 +534,7 @@
         </div>
         <div class="case-media"><img src="assets/case-hrono.png" alt="Экран таймера: время забега, зона финиша с предохранителем и этапы демонстрации" loading="lazy" width="1600" height="737"></div>
       </article>
-      <article class="case flip rv">
+      <article data-kind="bot" class="case flip rv">
         <div>
           <span class="case-tag">Telegram-бот · автоматизация</span>
           <h3>Бот учёта рабочего времени</h3>
@@ -506,7 +558,7 @@
           </div>
         </div>
       </article>
-      <article class="case rv">
+      <article data-kind="trainer" class="case rv">
         <div>
           <span class="case-tag">Godot · реанимация проекта</span>
           <h3>Возвращение к жизни игры без исходников</h3>
@@ -530,7 +582,7 @@
           </div>
         </div>
       </article>
-      <article class="case flip rv">
+      <article data-kind="trainer" class="case flip rv">
         <div>
           <span class="case-tag">Офлайн-киоск · интерактивный экспонат</span>
           <h3>«Хакер» — тренажёр о последствиях киберпреступлений</h3>
@@ -559,6 +611,7 @@
         <div class="step rv"><i>03</i><h3>Показываем по ходу</h3><p>Промежуточные версии и лог решений: видно, что и почему сделано.</p></div>
         <div class="step rv"><i>04</i><h3>Не пропадаем</h3><p>Установка у вас, исходники ваши, поддержка после сдачи.</p></div>
       </div>
+      <div class="more-wrap"><button type="button" class="btn btn-ghost" id="moreBtn">Показать ещё</button></div>
     </div>
   </section>
 
@@ -786,6 +839,46 @@
   lb.querySelector(".lb-close").addEventListener("click", function(){ lb.close(); });
   lb.addEventListener("close", function(){ lbImg.src = ""; });
 
+
+
+  /* ======= фильтр кейсов и «Показать ещё» ======= */
+  (function () {
+    var wrap = document.querySelector(".filters");
+    var moreBtn = document.getElementById("moreBtn");
+    if (!wrap) return;
+    var cases = Array.prototype.slice.call(document.querySelectorAll(".case[data-kind]"));
+    var LIMIT = 4;
+    var filter = "all";
+    var expanded = false;
+
+    function visibleList(){
+      return filter === "all" ? cases : cases.filter(function(c){ return c.dataset.kind === filter; });
+    }
+    function apply(){
+      var list = visibleList();
+      var limit = (filter === "all" && !expanded) ? LIMIT : list.length;
+      cases.forEach(function(c){ c.hidden = true; });
+      list.slice(0, limit).forEach(function(c){
+        c.hidden = false;
+        c.classList.add("in");
+      });
+      var hiddenCount = list.length - limit;
+      if (moreBtn) {
+        moreBtn.hidden = hiddenCount <= 0;
+        moreBtn.textContent = "Показать ещё " + hiddenCount;
+      }
+    }
+    wrap.addEventListener("click", function(e){
+      var btn = e.target.closest(".f-btn");
+      if (!btn) return;
+      filter = btn.dataset.filter;
+      expanded = false;
+      wrap.querySelectorAll(".f-btn").forEach(function(b){ b.classList.toggle("is-on", b === btn); });
+      apply();
+    });
+    if (moreBtn) moreBtn.addEventListener("click", function(){ expanded = true; apply(); });
+    apply();
+  })();
 
 })();
 </script>
